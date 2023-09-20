@@ -2,7 +2,7 @@ import streamlit as st
 from llama_index import VectorStoreIndex, ServiceContext, Document
 from llama_index.llms import OpenAI
 import openai
-from llama_index import SimpleDirectoryReader
+from llama_index import SimpleDirectoryReader   
 from llama_index import TrafilaturaWebReader
 
 st.set_page_config(page_title="Modelwise Chat Support", page_icon="M", layout="centered", initial_sidebar_state="auto", menu_items=None)
@@ -20,7 +20,7 @@ def load_data():
         reader = SimpleDirectoryReader(input_dir="./data", recursive=True)
         docs = reader.load_data()
         urls = ["https://modelwise.ai/product/","https://modelwise.ai/category/blog-articles/","https://modelwise.ai/company/"]
-        reader = TrafilaturaWebReader(urls=urls)
+        reader = TrafilaturaWebReader(urls)
         docs = reader.load_data()
         service_context = ServiceContext.from_defaults(llm=OpenAI(model="gpt-3.5-turbo", temperature=0.5, system_prompt="You are an exceptional customer support chatbot for the company Modelwise that gently answers questions related to the company. Use only information from the context. If you don't know the answer just ask the customer to contact Arnold and provide his contact details. Do not make up any answer."))
         index = VectorStoreIndex.from_documents(docs, service_context=service_context)
