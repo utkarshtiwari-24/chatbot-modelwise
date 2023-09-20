@@ -3,7 +3,6 @@ from llama_index import VectorStoreIndex, ServiceContext, Document
 from llama_index.llms import OpenAI
 import openai
 from llama_index import SimpleDirectoryReader
-from llama_index import SeleniumURLLoader
 from llama_index import TrafilaturaWebReader
 
 st.set_page_config(page_title="Modelwise Chat Support", page_icon="M", layout="centered", initial_sidebar_state="auto", menu_items=None)
