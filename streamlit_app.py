@@ -20,8 +20,8 @@ def load_data():
         reader = SimpleDirectoryReader(input_dir="./data", recursive=True)
         docs = reader.load_data()
         urls = ["https://modelwise.ai/product/","https://modelwise.ai/category/blog-articles/","https://modelwise.ai/company/"]
-        reader = TrafilaturaWebReader(urls)
-        docs = reader.load_data()
+        reader = TrafilaturaWebReader()
+        docs = reader.load_data(urls=urls)
         service_context = ServiceContext.from_defaults(llm=OpenAI(model="gpt-3.5-turbo", temperature=0.5, system_prompt="You are an exceptional customer support chatbot for the company Modelwise that gently answers questions related to the company. Use only information from the context. If you don't know the answer just ask the customer to contact Arnold and provide his contact details. Do not make up any answer."))
         index = VectorStoreIndex.from_documents(docs, service_context=service_context)
         return index
